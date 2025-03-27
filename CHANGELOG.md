@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-package-tools` will be documented in this file.
 
+## 0.0.10 - 2025-03-27
+
+### What's Changed
+
+- Fix: Refactor GitHub service to use updated configuration key for API settings
+
 ## 0.0.9 - 2025-03-27
 
 ### What's Changed
