@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-package-tools` will be documented in this file.
 
+## 0.0.6 - 2025-03-27
+
+### What's Changed
+
+- Fix: Rename namespace for Laravel GitHub service package
+
 ## 0.0.5 - 2025-03-27
 
 ### What's Changed
