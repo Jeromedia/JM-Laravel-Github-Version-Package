@@ -50,10 +50,23 @@ x-init="fetch('{{route('github.api')}}')
         .then(data => { github = data; })">
 ```
 
-### **2. Add the route to your api routes file**
+Somewhere in your footer
+
+```bash
+<span class="text-stone-400" x-text="github"></span>
+```
+
+### **2. Add the route to your api routes file or publish the route**
 
 ```bash
 Route::get('/github', GithubController::class)->name('github.api');
+```
+
+### **3. Or publish the route**
+
+```bash
+php artisan vendor:publish --provider="Jeromedia\LaravelGithubService\GithubServiceProvider" --tag=routes
+
 ```
 
 ---
