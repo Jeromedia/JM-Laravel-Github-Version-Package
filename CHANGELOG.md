@@ -1,6 +1,13 @@
 # Changelog
 
 All notable changes to `laravel-package-tools` will be documented in this file.
+
+## 1.1 - 2025-03-27
+
+### What's Changed
+
+- Fix: namespace and service class
+
 ## 1.0.0 - 2025-03-27
 
 ### What's Changed
