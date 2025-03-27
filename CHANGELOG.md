@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-package-tools` will be documented in this file.
 
+## 0.0.8 - 2025-03-27
+
+### What's Changed
+
+- Update: README.md clarify installation instructions
+
 ## 0.0.7 - 2025-03-27
 
 ### What's Changed

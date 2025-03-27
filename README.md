@@ -1,9 +1,11 @@
 # **Laravel GitHub Service**
 
-*A Laravel package to fetch and compare GitHub repository versions.*
+_A Laravel package to fetch and compare GitHub repository versions._
 
 ## **Description**
+
 This package provides a simple way to:
+
 - Get the current version of a Laravel web application (from Git tags).
 - Fetch the latest release tag from a GitHub repository.
 - Compare the two versions to check for updates.
@@ -13,6 +15,7 @@ This package provides a simple way to:
 ## **Installation**
 
 ### **1. Add the private repository to your Laravel project (`composer.json`)**
+
 If hosted on a private Git repository, add:
 
 ```json
@@ -28,13 +31,15 @@ If hosted on a private Git repository, add:
 ```
 
 ### **2. Install the package using Composer**
+
 ```bash
 composer require jeromedia/laravel-github-service
 ```
 
 ### **3. Publish the configuration (if needed)**
+
 ```bash
-php artisan vendor:publish --provider="Jeromedia\GithubServiceProvider"
+php artisan vendor:publish --provider="Jeromedia\LaravelGithubService\GithubServiceProvider" --tag=config
 ```
 
 ---
@@ -56,6 +61,7 @@ echo $versionStatus;
 ---
 
 ## **Development & Contributions**
+
 - **Author:** [Jerome / Jeromedia Team]
 - **Website:** [jeromedia.com]
 - **Contact:** [info@jeromedia.com]
@@ -64,8 +70,8 @@ echo $versionStatus;
 ---
 
 ## **Notes**
+
 - This package requires a **GitHub personal access token** to fetch repository data.
 - Works best with Laravel 9+ and PHP 8+.
 
 ---
-
