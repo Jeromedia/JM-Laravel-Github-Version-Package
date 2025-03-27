@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-package-tools` will be documented in this file.
 
+## 0.0.7 - 2025-03-27
+
+### What's Changed
+
+- Fix: Configuration file for GitHub service with API token and URL settings
+
 ## 0.0.6 - 2025-03-27
 
 ### What's Changed
