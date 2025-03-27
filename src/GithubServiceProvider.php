@@ -1,6 +1,6 @@
 <?php
 
-namespace MyPackage;
+namespace Jeromedia\LaravelGithubService;
 
 use Illuminate\Support\ServiceProvider;
 
