@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-package-tools` will be documented in this file.
 
+## 0.0.4 - 2025-03-27
+
+### What's Changed
+
+- remove: illuminate/support requirement from composer.json
+
 ## 0.0.3 - 2025-03-27
 
 ### What's Changed
