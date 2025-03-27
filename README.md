@@ -14,34 +14,19 @@ This package provides a simple way to:
 
 ## **Installation**
 
-### **1. Add the private repository to your Laravel project (`composer.json`)**
-
-If hosted on a private Git repository, add:
-
-```json
-"repositories": [
-    {
-        "type": "vcs",
-        "url": "git@github.com:jeromedia/laravel-github-service.git"
-    }
-],
-"require": {
-    "jeromedia/laravel-github-service": "dev-main"
-}
-```
-
-### **2. Install the package using Composer**
+### **1. Install the package using Composer**
 
 ```bash
 composer require jeromedia/laravel-github-service
 ```
 
-### **3. Publish the configuration (if needed)**
+### **2. Publish the configuration (if needed)**
 
 ```bash
 php artisan vendor:publish --provider="Jeromedia\LaravelGithubService\GithubServiceProvider" --tag=config
 ```
-Add these to your .env file
+
+### **3. Add to your .env file**
 
 ```bash
 #Github Connect
@@ -55,16 +40,20 @@ GITHUB_CACHE_TTL=3600
 
 ## **Usage**
 
-Import and call the service in your controller:
+### **1. Add the following code to your footer**
 
-```php
-use Jeromedia\Services\GithubService;
+```bash
+<div class="container mx-auto relative"
+x-data="{ github: '' }"
+x-init="fetch('{{route('github.api')}}')
+        .then(response => response.text())
+        .then(data => { github = data; })">
+```
 
-$webAppVersion = GithubService::getCurrentWebAppVersion();
-$repoVersion = GithubService::getCurrentRepoVersion();
-$versionStatus = GithubService::compareVersions($webAppVersion, $repoVersion);
+### **2. Add the route to your api routes file**
 
-echo $versionStatus;
+```bash
+Route::get('/github', GithubController::class)->name('github.api');
 ```
 
 ---
