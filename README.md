@@ -41,6 +41,15 @@ composer require jeromedia/laravel-github-service
 ```bash
 php artisan vendor:publish --provider="Jeromedia\LaravelGithubService\GithubServiceProvider" --tag=config
 ```
+Add these to your .env file
+
+```bash
+#Github Connect
+GITHUB_REPO=""
+GITHUB_OWNER=""
+GITHUB_TOKEN=""
+GITHUB_CACHE_TTL=
+```
 
 ---
 
