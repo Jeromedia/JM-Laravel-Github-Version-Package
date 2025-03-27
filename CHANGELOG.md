@@ -1,6 +1,11 @@
 # Changelog
 
 All notable changes to `laravel-package-tools` will be documented in this file.
+## 1.0.0 - 2025-03-27
+
+### What's Changed
+
+- Add: new version
 
 ## 0.0.10 - 2025-03-27
 
