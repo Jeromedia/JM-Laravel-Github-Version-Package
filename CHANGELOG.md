@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-package-tools` will be documented in this file.
 
+## 0.0.9 - 2025-03-27
+
+### What's Changed
+
+- Add: GitHub API route and controller; update README for usage instructions
+
 ## 0.0.8 - 2025-03-27
 
 ### What's Changed
