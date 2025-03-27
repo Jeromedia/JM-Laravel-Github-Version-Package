@@ -20,7 +20,7 @@ This package provides a simple way to:
 composer require jeromedia/laravel-github-service
 ```
 
-### **2. Publish the configuration (if needed)**
+### **2. Publish the configuration - Important**
 
 ```bash
 php artisan vendor:publish --provider="Jeromedia\LaravelGithubService\GithubServiceProvider" --tag=config
