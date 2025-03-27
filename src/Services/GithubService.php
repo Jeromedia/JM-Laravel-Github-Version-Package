@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Services;
+namespace Jeromedia\LaravelGithubService\Services;
+
 
 use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Facades\Http;

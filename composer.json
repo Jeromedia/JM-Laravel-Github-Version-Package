@@ -1,36 +1,36 @@
 {
-    "name": "jeromedia/laravel-github-service",
-    "description": "A service for interacting with GitHub repositories and comparing versions.",
-    "type": "library",
-    "keywords": [
-        "jeromedia",
-        "laravel-github-service"
-    ],
-    "homepage": "https://github.com/jeromedia/laravel-github-service",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Jerome",
-            "email": "info@jeromedia.com",
-            "role": "Developer"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "Jeromedia\\LaravelGithubService\\": "src/"
-        }
-    },
-    "require": {
-        "php": "^8.0",
-        "illuminate/support": "^9.0 || ^10.0 || ^11.0"
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Jeromedia\\LaravelGithubService\\GithubServiceProvider"
-            ]
-        }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+  "name": "jeromedia/laravel-github-service",
+  "description": "A service for interacting with GitHub repositories and comparing versions.",
+  "type": "library",
+  "keywords": [
+    "jeromedia",
+    "laravel-github-service"
+  ],
+  "homepage": "https://github.com/jeromedia/laravel-github-service",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Jerome",
+      "email": "info@jeromedia.com",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Jeromedia\\LaravelGithubService\\": "src/"
+    }
+  },
+  "require": {
+    "php": "^8.0",
+    "illuminate/support": "^9.0 || ^10.0 || ^11.0"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Jeromedia\\LaravelGithubService\\GithubServiceProvider"
+      ]
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }
