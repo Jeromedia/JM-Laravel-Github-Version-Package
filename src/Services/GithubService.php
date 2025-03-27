@@ -15,7 +15,7 @@ class GithubService
     }
     public static function getCurrentRepoVersion()
     {
-        $github = config('jeromedia.github');
+        $github = config('github-api');
         return Cache::remember('github-tagname', $github['cache-ttl'], function () use ($github) {
             $response = Http::withToken($github['token'])->get($github['api']);
             if ($response->successful()) {
