@@ -48,7 +48,7 @@ Add these to your .env file
 GITHUB_REPO=""
 GITHUB_OWNER=""
 GITHUB_TOKEN=""
-GITHUB_CACHE_TTL=
+GITHUB_CACHE_TTL=3600
 ```
 
 ---
