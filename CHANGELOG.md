@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-package-tools` will be documented in this file.
 
+## 1.1.3 - 2025-03-28
+
+### What's Changed
+
+- Update: GitHub API call to fetch latest release by owner and repo
+
 ## 1.1.2 - 2025-03-28
 
 ### What's Changed
