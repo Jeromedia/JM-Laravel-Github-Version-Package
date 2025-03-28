@@ -74,7 +74,12 @@ Route::get('/github', GithubController::class)->name('github.api');
 
 ```bash
 php artisan vendor:publish --provider="Jeromedia\LaravelGithubService\GithubServiceProvider" --tag=routes
+```
 
+### **4. Clear the GitHub version cache**
+
+```bash
+php artisan github-service:clear-cache
 ```
 
 ---
