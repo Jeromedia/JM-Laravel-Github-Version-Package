@@ -26,14 +26,22 @@ composer require jeromedia/laravel-github-service
 php artisan vendor:publish --provider="Jeromedia\LaravelGithubService\GithubServiceProvider" --tag=config
 ```
 
-### **3. Add to your .env file**
+### **3. The Github Full APi link for fetching the latest release**
+
+```bash
+https://api.github.com/repos/{OWNER}/{REPO}/releases/latest
+```
+
+### **4. Add to your .env file**
 
 ```bash
 #Github Connect
-GITHUB_REPO=""
-GITHUB_OWNER=""
-GITHUB_TOKEN=""
-GITHUB_CACHE_TTL=3600
+GITHUB_API_REPO=""
+GITHUB_API_OWNER=""
+GITHUB_API_VERSION="2022-11-28"
+GITHUB_API_URL="https://api.github.com/repos"
+GITHUB_API_TOKEN=""
+GITHUB_API_CACHE_TTL=3600
 ```
 
 ---
