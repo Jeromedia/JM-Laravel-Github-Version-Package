@@ -2,6 +2,15 @@
 
 All notable changes to `laravel-package-tools` will be documented in this file.
 
+## 1.1.2 - 2025-03-28
+
+### What's Changed
+
+- Add: GitHub API owner, repo, and version settings
+- Add: include .env in .gitignore
+- Update: API call headers
+- Update: README to reflect changes in GitHub API configuration and environment variables
+
 ## 1.1.1 - 2025-03-28
 
 ### What's Changed
