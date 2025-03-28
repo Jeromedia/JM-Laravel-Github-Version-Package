@@ -16,13 +16,17 @@ class GithubService
     }
     public static function getCurrentRepoVersion()
     {
-        $github = config('github-api');
+        $github = config('github-service');
         return Cache::remember('github-tagname', $github['cache_ttl'], function () use ($github) {
-            $response = Http::withToken($github['token'])->get($github['api']);
+            $response = Http::withToken($github['token'])->withHeaders([
+                'Accept' => 'application/vnd.github+json',
+                'X-GitHub-Api-Version' => $github['github_version'],
+            ])->get($github['api']);
             if ($response->successful()) {
                 return $response->json('tag_name');
             }
-            return "error";
+            // return "error";
+            return $github;
         });
     }
     public static function compareVersions($webAppVersion, $repoVersion)
