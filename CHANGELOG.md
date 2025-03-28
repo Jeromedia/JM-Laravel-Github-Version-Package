@@ -2,11 +2,16 @@
 
 All notable changes to `laravel-package-tools` will be documented in this file.
 
+## 1.2.0 - 2025-03-28
+
+### What's Changed
+
+- Add: Command to clear GitHub repository version cache
 ## 1.1.4 - 2025-03-28
 
 ### What's Changed
 
-- Update: cache TTL environment variable for GitHub API configuration
+- Update: Cache TTL environment variable for GitHub API configuration
 
 ## 1.1.3 - 2025-03-28
 
