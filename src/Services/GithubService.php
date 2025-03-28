@@ -21,12 +21,11 @@ class GithubService
             $response = Http::withToken($github['token'])->withHeaders([
                 'Accept' => 'application/vnd.github+json',
                 'X-GitHub-Api-Version' => $github['github_version'],
-            ])->get($github['api']);
+            ])->get($github['api'] . "/" . $github['owner'] . "/" . $github['repo'] . "/releases/latest");
             if ($response->successful()) {
                 return $response->json('tag_name');
             }
-            // return "error";
-            return $github;
+            return "error";
         });
     }
     public static function compareVersions($webAppVersion, $repoVersion)
