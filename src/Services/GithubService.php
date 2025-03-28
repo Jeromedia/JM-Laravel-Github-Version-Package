@@ -17,7 +17,7 @@ class GithubService
     public static function getCurrentRepoVersion()
     {
         $github = config('github-api');
-        return Cache::remember('github-tagname', $github['cache-ttl'], function () use ($github) {
+        return Cache::remember('github-tagname', $github['cache_ttl'], function () use ($github) {
             $response = Http::withToken($github['token'])->get($github['api']);
             if ($response->successful()) {
                 return $response->json('tag_name');
