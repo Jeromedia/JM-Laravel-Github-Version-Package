@@ -46,6 +46,20 @@ GITHUB_API_CACHE_TTL=3600
 
 ---
 
+## **Installation**
+
+### **1. Get a gitHub Fine-Grained Token**
+
+https://github.com/settings/personal-access-tokens
+
+### **2. Repository access**
+
+Select only for the repository you want to get the tag version
+
+### **3. Repository permissions**
+
+Select ONLY "Contents", Metadata will automatically selected
+
 ## **Usage**
 
 ### **1. Add the following code to your footer**
