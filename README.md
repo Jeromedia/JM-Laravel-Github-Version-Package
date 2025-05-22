@@ -46,7 +46,7 @@ GITHUB_API_CACHE_TTL=3600
 
 ---
 
-## **Installation**
+## **GitHub Api Token**
 
 ### **1. Get a gitHub Fine-Grained Token**
 
