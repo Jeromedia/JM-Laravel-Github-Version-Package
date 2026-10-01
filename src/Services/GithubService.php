@@ -145,7 +145,7 @@ class GithubService
         }
 
         if (version_compare($current, $latest, '<')) {
-            return $displayVersion . ' (update available)';
+            return $displayVersion . '+';
         }
 
         return $displayVersion;
