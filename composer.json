@@ -1,10 +1,13 @@
 {
   "name": "jeromedia/laravel-github-service",
-  "description": "A service for interacting with GitHub repositories and comparing versions.",
+  "description": "A Laravel package that detects the deployed Git tag and compares it with the latest GitHub release.",
   "type": "library",
   "keywords": [
     "jeromedia",
-    "laravel-github-service"
+    "laravel",
+    "github",
+    "version",
+    "release"
   ],
   "homepage": "https://github.com/jeromedia/laravel-github-service",
   "license": "MIT",
@@ -22,7 +25,9 @@
   },
   "require": {
     "php": "^8.0",
-    "illuminate/support": "^9.0 || ^10.0 || ^11.0"
+    "illuminate/http": "^9.0 || ^10.0 || ^11.0 || ^12.0 || ^13.0",
+    "illuminate/support": "^9.0 || ^10.0 || ^11.0 || ^12.0 || ^13.0",
+    "symfony/process": "^5.4 || ^6.0 || ^7.0 || ^8.0"
   },
   "extra": {
     "laravel": {

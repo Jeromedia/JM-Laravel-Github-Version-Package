@@ -3,19 +3,27 @@
 namespace Jeromedia\LaravelGithubService\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Cache;
+use Jeromedia\LaravelGithubService\Services\GithubService;
 
 class ForgetGithubCache extends Command
 {
     protected $signature = 'github-service:clear-cache';
-    protected $description = 'Clear the GitHub repository version cache';
 
-    public function handle()
+    protected $description = 'Clear the cached latest GitHub release';
+
+    public function handle(): int
     {
-        if (Cache::forget('github-tagname')) {
-            $this->info('GitHub version cache cleared successfully.');
+        $cacheKey = GithubService::getCacheKey();
+        $cleared = GithubService::clearCache();
+
+        if ($cleared) {
+            $this->info('GitHub release cache cleared.');
         } else {
-            $this->warn('Cache key "github-tagname" does not exist or is already cleared.');
+            $this->info('GitHub release cache was already empty.');
         }
+
+        $this->line('Cache key: ' . $cacheKey);
+
+        return self::SUCCESS;
     }
 }

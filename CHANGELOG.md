@@ -1,6 +1,18 @@
 # Changelog
 
-All notable changes to `laravel-package-tools` will be documented in this file.
+## 2.0.0 - 2026-10-01
+
+- Detect the deployed website version from the exact Git tag on `HEAD`.
+- Remove the manually configured GitHub API version.
+- Cache only the latest GitHub release.
+- Use a repository-specific cache key.
+- Remove the old "current version is newer" / "impossible" display state.
+- Fall back to the local deployed version if GitHub is unavailable.
+- Fix the default GitHub API base URL.
+- Remove the dependency on the consuming application's base controller.
+- Run Git commands from Laravel's `base_path()`.
+- Add Laravel 12 and Laravel 13 package compatibility.
+- Add Vue / Inertia footer usage documentation.
 
 ## v1.2.2 - 2025-05-22
 

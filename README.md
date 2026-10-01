@@ -1,115 +1,280 @@
-# **Laravel GitHub Service**
+# Laravel GitHub Service
 
-_A Laravel package to fetch and compare GitHub repository versions._
+A small Laravel package that automatically shows the version currently deployed on a website and tells you when a newer GitHub release is available.
 
-## **Description**
+## How it works
 
-This package provides a simple way to:
+The package uses two sources:
 
-- Get the current version of a Laravel web application (from Git tags).
-- Fetch the latest release tag from a GitHub repository.
-- Compare the two versions to check for updates.
+1. **Current website version** — read automatically from the Git tag attached to the deployed `HEAD` commit.
+2. **Latest available version** — fetched from GitHub's `/releases/latest` API endpoint.
 
----
+The GitHub response is cached. The local Git version is read directly and is not cached.
 
-## **Installation**
+Example:
 
-### **1. Install the package using Composer**
+```text
+Deployed website: v1.4.2
+Latest GitHub release: v1.5.0
+
+Output: v1.4.2 (update available)
+```
+
+If both versions are the same:
+
+```text
+v1.5.0
+```
+
+If the deployed website is newer than GitHub, the package simply shows the deployed version:
+
+```text
+v1.6.0
+```
+
+There is no "impossible" state.
+
+## Requirements
+
+- Laravel 9, 10, 11, 12, or 13
+- PHP 8+
+- Laravel 13 requires PHP 8.3+
+- Git must be installed on the production server
+- The deployed Laravel project must contain its `.git` directory
+- The deployed commit should have a version tag such as `v1.5.0`
+
+## Installation
 
 ```bash
 composer require jeromedia/laravel-github-service
 ```
 
-### **2. Publish the configuration - Important**
+Publish the configuration:
 
 ```bash
-php artisan vendor:publish --provider="Jeromedia\LaravelGithubService\GithubServiceProvider" --tag=config
+php artisan vendor:publish \
+    --provider="Jeromedia\LaravelGithubService\GithubServiceProvider" \
+    --tag=config
 ```
 
-### **3. The Github Full APi link for fetching the latest release**
+## One-time `.env` setup
 
-```bash
-https://api.github.com/repos/{OWNER}/{REPO}/releases/latest
-```
-
-### **4. Add to your .env file**
-
-```bash
-#Github Connect
-GITHUB_API_REPO=""
-GITHUB_API_OWNER=""
-GITHUB_API_VERSION="2022-11-28"
+```env
+GITHUB_API_OWNER="your-owner"
+GITHUB_API_REPO="your-repository"
+GITHUB_API_TOKEN="your-token"
 GITHUB_API_URL="https://api.github.com/repos"
-GITHUB_API_TOKEN=""
 GITHUB_API_CACHE_TTL=3600
 ```
 
----
+`GITHUB_API_CACHE_TTL=3600` means GitHub is checked at most once per hour.
 
-## **GitHub Api Token**
+You do **not** configure the website version. The package reads it automatically from Git.
 
-### **1. Get a gitHub Fine-Grained Token**
+## GitHub token
 
-https://github.com/settings/personal-access-tokens
+For a private repository, use a GitHub token with read access to the repository.
 
-### **2. Repository access**
+For a public repository, GitHub can serve the release endpoint without a token, but using a token provides a higher API rate limit.
 
-Select only for the repository you want to get the tag version
+## Endpoint
 
-### **3. Repository permissions**
+The package automatically registers:
 
-Select ONLY "Contents", Metadata will automatically selected
+```text
+GET /github
+```
 
-## **Usage**
+with the route name:
 
-### **1. Add the following code to your footer**
+```php
+route('github.api')
+```
 
-```bash
-<div class="container mx-auto relative"
-x-data="{ github: '' }"
-x-init="fetch('{{route('github.api')}}')
+The endpoint returns plain text.
+
+Possible output:
+
+```text
+v1.5.0
+```
+
+or:
+
+```text
+v1.5.0 (update available)
+```
+
+## Vue / Inertia usage
+
+If your Laravel application uses Vue with Inertia, you can fetch the version from the package endpoint directly from your footer component.
+
+Example:
+
+```vue
+<script setup>
+import { onMounted, ref } from 'vue'
+
+const githubVersion = ref('')
+
+onMounted(async () => {
+    const response = await fetch('/github')
+
+    githubVersion.value = await response.text()
+})
+</script>
+
+<template>
+    <span>{{ githubVersion }}</span>
+</template>
+```
+
+You can place this logic directly inside your existing Vue footer component.
+
+The GitHub token and repository configuration remain on the Laravel backend. Nothing sensitive is exposed to Vue.
+
+## Alpine.js usage
+
+For Laravel applications using Alpine.js:
+
+```html
+<div
+    x-data="{ github: '' }"
+    x-init="fetch('{{ route('github.api') }}')
         .then(response => response.text())
-        .then(data => { github = data; })">
+        .then(data => github = data)"
+>
+    <span class="text-stone-400" x-text="github"></span>
+</div>
 ```
 
-Somewhere in your footer
+## Cache behavior
 
-```bash
-<span class="text-stone-400" x-text="github"></span>
+Only the latest GitHub release is cached.
+
+The local website version is read directly from Git whenever the package endpoint is requested.
+
+The cache key is specific to the configured owner and repository, so multiple Laravel websites can safely use the same Redis or database cache.
+
+Default cache time:
+
+```env
+GITHUB_API_CACHE_TTL=3600
 ```
 
-### **2. Add the route to your api routes file or publish the route**
+With the default value, GitHub is queried at most once per hour for that configured repository.
 
-```bash
-Route::get('/github', GithubController::class)->name('github.api');
-```
+The comparison itself is inexpensive and is performed when the `/github` endpoint is requested.
 
-### **3. Or publish the route**
-
-```bash
-php artisan vendor:publish --provider="Jeromedia\LaravelGithubService\GithubServiceProvider" --tag=routes
-```
-
-### **4. Clear the GitHub version cache**
+To manually clear the GitHub release cache:
 
 ```bash
 php artisan github-service:clear-cache
 ```
 
----
+You normally do not need to run this command.
 
-## **Development & Contributions**
+## When GitHub is unavailable
 
-- **Author:** [Jerome / Jeromedia Team]
-- **Website:** [jeromedia.com]
-- **Contact:** [info@jeromedia.com]
-- **License:** Private (Internal Use)
+If GitHub is temporarily unavailable, the package still displays the locally deployed version.
 
----
+Example:
 
-## **Notes**
+```text
+v1.5.0
+```
 
-- This package requires a **GitHub personal access token** to fetch repository data.
-- Works best with Laravel 9+ and PHP 8+.
+It will not replace the footer with a GitHub connection error.
 
----
+## Important deployment note
+
+The package determines the installed version using:
+
+```bash
+git describe --tags --exact-match HEAD
+```
+
+This checks which Git tag belongs to the exact commit currently deployed.
+
+For example, if the deployed `HEAD` is tagged:
+
+```text
+v1.5.0
+```
+
+then the package considers the website's current version to be:
+
+```text
+v1.5.0
+```
+
+The deployed commit must therefore be tagged.
+
+If `.git` is removed during deployment, or the deployed commit has no exact tag, the package cannot automatically know which version is installed and will return:
+
+```text
+Version unavailable
+```
+
+## Configuration
+
+The published config file is:
+
+```text
+config/github-service.php
+```
+
+```php
+<?php
+
+return [
+    'owner' => env('GITHUB_API_OWNER', ''),
+    'repo' => env('GITHUB_API_REPO', ''),
+    'token' => env('GITHUB_API_TOKEN', ''),
+    'api' => env('GITHUB_API_URL', 'https://api.github.com/repos'),
+    'cache_ttl' => (int) env('GITHUB_API_CACHE_TTL', 3600),
+];
+```
+
+No version number is stored in `.env`, config, or a database.
+
+## Version comparison
+
+The package behaves as follows:
+
+```text
+Local:  v1.4.2
+GitHub: v1.5.0
+
+v1.4.2 (update available)
+```
+
+```text
+Local:  v1.5.0
+GitHub: v1.5.0
+
+v1.5.0
+```
+
+```text
+Local:  v1.6.0
+GitHub: v1.5.0
+
+v1.6.0
+```
+
+A local version newer than the latest GitHub release is valid and is not treated as an error.
+
+## Release 2.0.0
+
+Version 2.0.0 changes the package to use the exact Git tag attached to the deployed `HEAD` commit as the website version.
+
+It also:
+
+- caches only the GitHub release lookup,
+- uses repository-specific cache keys,
+- removes the old "impossible" version state,
+- falls back to the local version if GitHub is unavailable,
+- removes the manually configured GitHub API version,
+- supports Laravel 9 through Laravel 13,
+- and documents both Vue / Inertia and Alpine.js frontend usage.

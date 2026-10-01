@@ -2,27 +2,14 @@
 
 namespace Jeromedia\LaravelGithubService\Controllers;
 
-
-
 use Jeromedia\LaravelGithubService\Services\GithubService;
 
-use App\Http\Controllers\Controller;
-
-
-class GithubController extends Controller
+class GithubController
 {
     public function __invoke()
     {
-        if (app()->environment('production')) {
-            $webAppVersion = GithubService::getCurrentWebAppVersion();
-            $repoVersion = GithubService::getCurrentRepoVersion();
-
-            $compareVersions = GithubService::compareVersions($webAppVersion, $repoVersion);
-
-            return $compareVersions;
-        } else {
-            $repoVersion = GithubService::getCurrentRepoVersion();
-            return $repoVersion;
-        }
+        return response(GithubService::getDisplayVersion(), 200)
+            ->header('Content-Type', 'text/plain; charset=UTF-8')
+            ->header('Cache-Control', 'no-store');
     }
 }
