@@ -1,6 +1,10 @@
 # Changelog
 
-## 2.0.0 - 2026-10-01
+## v2.0.1 - 2026-10-01
+
+- Show a `+` after the deployed version when an update is available, replacing ` (update available)`.
+
+## v2.0.0 - 2026-10-01
 
 - Detect the deployed website version from the exact Git tag on `HEAD`.
 - Remove the manually configured GitHub API version.
